@@ -9,7 +9,6 @@ namespace GeneralStore.MVC.Controllers
 {
     public class ProductController : Controller
     {
-        // Add the application DB Context (link to the database)
         private ApplicationDbContext _db = new ApplicationDbContext();
 
         // GET: Product
@@ -17,14 +16,14 @@ namespace GeneralStore.MVC.Controllers
         {
             return View(_db.Products.ToList());
         }
-
-        // Get: Product
+        
+        // Get: Product/Create
         public ActionResult Create()
         {
             return View();
         }
-
-        // POST: Product
+        
+        // POST: Product/Create
         [HttpPost]
         public ActionResult Create(Product product)
         {
@@ -35,6 +34,22 @@ namespace GeneralStore.MVC.Controllers
                 return RedirectToAction("Index");
             }
 
+            return View(product);
+        }
+
+        // GET : Delete
+        // Product/Delete/{id}
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+            Product product = _db.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
             return View(product);
         }
     }

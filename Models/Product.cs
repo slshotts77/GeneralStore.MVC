@@ -14,10 +14,4 @@ namespace GeneralStore.MVC.Models
         public decimal Price { get; set; }
         public bool IsFood { get; set; }
     }
-
-    //public class ProductDbContext : DbContext
-    //{
-        //public DbSet<Product> Products { get; set; }
-        //public object Product { get; internal set; }
-    //}
 }
